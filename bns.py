@@ -125,13 +125,13 @@ try:
                 parent = text_element.find_element(By.XPATH, "..")
                 int_quantity = int(parent.text.strip().split("\n")[1])
                 quantity_list.append(int_quantity)
-                print(parent.text.strip())
+                # print(parent.text.strip())
             if rotate == 1:
                 # print(f"item: {text}")
                 item_list.append(text)
             if rotate == 2:
                 # print(f"price: {text}")
-                print(text.replace("￥", "").replace(",", ""))
+                # print(text.replace("￥", "").replace(",", ""))
                 price_list.append(int(text.replace("￥", "").replace(",", "")))
             rotate += 1
             if rotate == 3:
@@ -265,11 +265,11 @@ try:
                     pass
         # time.sleep(100)
         test_btn = driver.find_elements(By.XPATH, "/html/body/div[3]/div[3]/div/div[2]/div[5]/div/div/div[2]/div[2]/div/div[4]/div[2]/div/a/div")
-        print("found test btn", len(test_btn))
+        # print("found test btn", len(test_btn))
         add_buttons = WebDriverWait(driver, 10).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "bs-button-normal--round-edge"))
         )
-        print(len(add_buttons))
+        # print(len(add_buttons))
         add_button = add_buttons[2]
         time.sleep(0.2)
         driver.execute_script("arguments[0].scrollIntoView(true);", add_button)
@@ -279,7 +279,7 @@ try:
                 driver.execute_script("arguments[0].click();", add_button)
             except Exception:
                 pass
-        print("pass")
+        # print("pass")
         # break
         # time.sleep(100)
     check_box = WebDriverWait(driver, 10).until(
