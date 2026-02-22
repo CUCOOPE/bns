@@ -14,7 +14,7 @@ from selenium.common.exceptions import (
 from selenium.webdriver.common.keys import Keys
 
 # Initialize the Chrome driver
-service = Service(executable_path=r"C:\chromedriver.exe")
+service = Service(executable_path=r"C:\chromedriver.exe") # Update this path to where you have chromedriver installed
 options = webdriver.ChromeOptions()
 options.add_argument("--window-size=1920,1080")
 driver = webdriver.Chrome(service=service, options=options)
