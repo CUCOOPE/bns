@@ -12,6 +12,7 @@ from selenium.common.exceptions import (
     WebDriverException,
 )
 from selenium.webdriver.common.keys import Keys
+from getpass import getpass
 
 # Initialize the Chrome driver
 service = Service(executable_path=r"C:\chromedriver.exe") # Update this path to where you have chromedriver installed
@@ -73,7 +74,7 @@ def robust_click(driver, element, retries=6, pause=0.2):
 link = input("Enter the bushiroad order link: ")
 tracking = input("Enter the tracking number: ")
 bns_user = input("Enter your BNS email: ")
-bns_pass = input("Enter your BNS password: ")
+bns_pass = getpass("Enter your BNS password: ")
 try:
     # Navigate to website
     driver.get(link)
