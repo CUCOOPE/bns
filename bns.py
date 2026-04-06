@@ -17,7 +17,14 @@ from getpass import getpass
 # Initialize the Chrome driver
 service = Service(executable_path=r"C:\chromedriver.exe") # Update this path to where you have chromedriver installed
 options = webdriver.ChromeOptions()
+prefs = {
+        "credentials_enable_service": False,
+        "profile.password_manager_enabled": False,
+        "profile.password_manager_leak_detection": False
+}
+options.add_experimental_option("prefs", prefs)
 options.add_argument("--window-size=1920,1080")
+
 driver = webdriver.Chrome(service=service, options=options)
 
 
@@ -107,9 +114,9 @@ try:
             time.sleep(0.5)
 
     # Wait for items container to load (up to 10 seconds)
-    items_xpath = "/html/body/div[1]/div[1]/div/div[1]/div/div/main/div/div/div/div/div[2]/div/div[2]/div/section/div/div/section/div[2]/div/div/div[1]"
+    items_xpath = "_1b9t7yp2"
     items = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, items_xpath))
+        EC.presence_of_element_located((By.CLASS_NAME, items_xpath))
     )
 
     # Print text for each element in items (e.g., descendant span elements)
@@ -166,15 +173,16 @@ try:
     time.sleep(0.2)
     driver.get("https://www.buyandship.today/account/v2020/shipments/new/")
     time.sleep(0.2)
-    el = driver.find_element(By.XPATH, "/html/body/div[3]/div[3]/div/div[1]/div[2]/div/div/p")
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div[3]/div/div[1]/div[2]/div/div/p"))
-    )
-    if not robust_click(driver, el):
-        try:
-            driver.execute_script("arguments[0].click();", el)
-        except Exception:
-            pass
+    el = driver.find_elements(By.XPATH, "/html/body/div[3]/div[3]/div/div[1]/div[2]/div/div/p")
+    if len(el) >0:
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div[3]/div/div[1]/div[2]/div/div/p"))
+        )
+        if not robust_click(driver, el):
+            try:
+                driver.execute_script("arguments[0].click();", el)
+            except Exception:
+                pass
     driver.get("https://www.buyandship.today/account/v2020/shipments/new/")
     time.sleep(0.2)
     el = driver.find_element(By.CLASS_NAME, "bs-select__content")
